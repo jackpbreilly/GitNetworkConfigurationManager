@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from lib.FileManager import FileManager
 from lib.GitManager import GitManager
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 repo_dir = "/home/jreilly/jack/repo"
 git_manager = GitManager(repo_dir=repo_dir)
