@@ -52,3 +52,11 @@ class GitManager:
             except GitCommandError as e:
                 return f"Failed to push changes: {e}"
         return "Repository not initialised."
+
+    def list_tracked_files(self) -> list[str]:
+        if self.repo:
+            tracked_files = self.repo.git.ls_files().split("\n")
+            return tracked_files if (tracked_files != [""]) else []
+        else:
+            print("Repository not initialised or is empty.")
+            return []

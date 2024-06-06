@@ -32,3 +32,14 @@ class FileManager:
             self.git_manager.commit_changes(f"Delete {file_name}")
         else:
             print(f"Error: File .{file_name} does not exist.")
+
+    def list_tracked_files(self) -> list[str]:
+        return self.git_manager.list_tracked_files()
+
+    def get_file_contents(self, file_name: str) -> str:
+        file_path = os.path.join(self.git_manager.repo_dir, file_name)
+        try:
+            with open(file_path, "r") as file:
+                return file.read()
+        except FileNotFoundError:
+            return f"Error: File {file_name} does not exist."
