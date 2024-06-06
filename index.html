@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitNetworkConfigurationManager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .file-list, .file-content {
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GitNetworkConfigurationManager</h1>
+        <div>
+            <button onclick="listFiles()">List Files</button>
+            <button onclick="cloneRepo()">Clone Repo</button>
+            <input type="text" id="repoUrl" placeholder="Repository URL">
+        </div>
+        <div class="file-list">
+            <h2>Files</h2>
+            <ul id="fileList"></ul>
+        </div>
+        <div class="file-content">
+            <h2>File Content</h2>
+            <input type="text" id="fileName" placeholder="File Name">
+            <textarea id="fileContent" placeholder="File Content"></textarea>
+            <button onclick="createFile()">Create File</button>
+            <button onclick="updateFile()">Update File</button>
+            <button onclick="deleteFile()">Delete File</button>
+            <button onclick="commitChanges()">Commit Changes</button>
+            <button onclick="pushChanges()">Push Changes</button>
+        </div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
