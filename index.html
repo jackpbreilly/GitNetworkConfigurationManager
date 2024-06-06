@@ -4,51 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitNetworkConfigurationManager</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 20px;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
+            max-width: 900px;
         }
-        h1 {
-            text-align: center;
+        #editor {
+            height: 400px;
+            border: 1px solid #ccc;
         }
-        .file-list, .file-content {
-            margin-top: 20px;
+        .file-list ul {
+            list-style-type: none;
+            padding: 0;
         }
-        textarea {
-            width: 100%;
-            height: 200px;
+        .file-list li {
+            padding: 5px;
+            cursor: pointer;
+        }
+        .file-list li:hover {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>GitNetworkConfigurationManager</h1>
-        <div>
-            <button onclick="listFiles()">List Files</button>
-            <button onclick="cloneRepo()">Clone Repo</button>
-            <input type="text" id="repoUrl" placeholder="Repository URL">
+        <h1 class="text-center">GitNetworkConfigurationManager</h1>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <input type="text" id="repoUrl" class="form-control" placeholder="Repository URL">
+                <div class="mt-2">
+                    <button class="btn btn-primary" onclick="cloneRepo()">Clone Repo</button>
+                    <button class="btn btn-secondary" onclick="listFiles()">List Files</button>
+                </div>
+            </div>
         </div>
-        <div class="file-list">
-            <h2>Files</h2>
-            <ul id="fileList"></ul>
-        </div>
-        <div class="file-content">
-            <h2>File Content</h2>
-            <input type="text" id="fileName" placeholder="File Name">
-            <textarea id="fileContent" placeholder="File Content"></textarea>
-            <button onclick="createFile()">Create File</button>
-            <button onclick="updateFile()">Update File</button>
-            <button onclick="deleteFile()">Delete File</button>
-            <button onclick="commitChanges()">Commit Changes</button>
-            <button onclick="pushChanges()">Push Changes</button>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Files</h2>
+                <div class="file-list">
+                    <ul id="fileList" class="list-group"></ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h2>File Content</h2>
+                <input type="text" id="fileName" class="form-control" placeholder="File Name">
+                <div id="editor" class="mt-2"></div>
+                <div class="mt-2">
+                    <button class="btn btn-success" onclick="createFile()">Create File</button>
+                    <button class="btn btn-warning" onclick="updateFile()">Update File</button>
+                    <button class="btn btn-danger" onclick="deleteFile()">Delete File</button>
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-info" onclick="commitChanges()">Commit Changes</button>
+                    <button class="btn btn-dark" onclick="pushChanges()">Push Changes</button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 </html>

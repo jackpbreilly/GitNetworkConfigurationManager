@@ -21,7 +21,7 @@ def list_files():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/files/<file_name>", methods=["GET"])
+@app.route("/files/<path:file_name>", methods=["GET"])
 def get_file(file_name):
     try:
         content = file_manager.get_file_contents(file_name)
@@ -42,7 +42,7 @@ def create_file():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/files/<file_name>", methods=["PUT"])
+@app.route("/files/<path:file_name>", methods=["PUT"])
 def update_file(file_name):
     data = request.get_json()
     new_content = data.get("content")
@@ -53,7 +53,7 @@ def update_file(file_name):
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/files/<file_name>", methods=["DELETE"])
+@app.route("/files/<path:file_name>", methods=["DELETE"])
 def delete_file(file_name):
     try:
         file_manager.delete_file(file_name)

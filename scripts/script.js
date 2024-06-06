@@ -1,4 +1,13 @@
 const apiUrl = 'http://127.0.0.1:5000';
+let editor;
+
+document.addEventListener("DOMContentLoaded", function() {
+    editor = CodeMirror(document.getElementById('editor'), {
+        lineNumbers: true,
+        mode: "javascript",
+        theme: "dracula"
+    });
+});
 
 async function listFiles() {
     const response = await fetch(`${apiUrl}/files`);
@@ -8,6 +17,7 @@ async function listFiles() {
     files.forEach(file => {
         const li = document.createElement('li');
         li.textContent = file;
+        li.className = "list-group-item";
         li.onclick = () => getFile(file);
         fileList.appendChild(li);
     });
@@ -17,12 +27,12 @@ async function getFile(fileName) {
     const response = await fetch(`${apiUrl}/files/${fileName}`);
     const data = await response.json();
     document.getElementById('fileName').value = fileName;
-    document.getElementById('fileContent').value = data.content;
+    editor.setValue(data.content);
 }
 
 async function createFile() {
     const fileName = document.getElementById('fileName').value;
-    const content = document.getElementById('fileContent').value;
+    const content = editor.getValue();
     await fetch(`${apiUrl}/files`, {
         method: 'POST',
         headers: {
@@ -35,7 +45,7 @@ async function createFile() {
 
 async function updateFile() {
     const fileName = document.getElementById('fileName').value;
-    const content = document.getElementById('fileContent').value;
+    const content = editor.getValue();
     await fetch(`${apiUrl}/files/${fileName}`, {
         method: 'PUT',
         headers: {
